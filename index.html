@@ -56,7 +56,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .search-bar { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
 .search-bar input, .search-bar select { padding: 7px 12px; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; font-size: 12px; background: #fff; color: #1a1a18; font-family: inherit; }
 .search-bar input { flex: 1; min-width: 180px; }
-.img-thumb { width: 32px; height: 32px; border-radius: 6px; background: #D3D1C7; display: inline-flex; align-items: center; justify-content: center; }
+.img-thumb { width: 32px; height: 32px; border-radius: 6px; background: #D3D1C7; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; }
+.img-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .overlay-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 300; align-items: flex-start; justify-content: center; padding: 1.5rem 1rem; overflow-y: auto; }
 .overlay-bg.open { display: flex; }
 .scheda { background: #fff; border-radius: 14px; width: 760px; max-width: 100%; }
@@ -89,7 +90,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .df { margin-bottom: 0.875rem; }
 .df label { font-size: 10px; font-weight: 500; color: #888780; display: flex; align-items: baseline; gap: 5px; margin-bottom: 3px; }
 .df p { font-size: 13px; }
-.det-img { width: 100%; height: 110px; background: #D3D1C7; border-radius: 10px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; }
+.det-img { width: 100%; height: 160px; background: #D3D1C7; border-radius: 10px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.det-img img { width: 100%; height: 100%; object-fit: contain; background: #f5f4f0; }
 .prev-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); font-size: 12px; }
 .prev-row:last-child { border-bottom: none; }
 .prev-row span:first-child { color: #888780; }
@@ -105,6 +107,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.25rem; }
 .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(80px); background: #2C2C2A; color: #F1EFE8; padding: 10px 20px; border-radius: 8px; font-size: 13px; transition: transform 0.3s; z-index: 500; white-space: nowrap; }
 .toast.show { transform: translateX(-50%) translateY(0); }
+.img-preview { width: 100%; max-height: 180px; object-fit: contain; border-radius: 8px; margin-top: 8px; background: #f5f4f0; border: 0.5px solid rgba(0,0,0,0.1); }
 @media (max-width: 700px) {
   .sidebar { width: 52px; }
   .sidebar-logo span, .nav-item span, .nav-label { display: none; }
@@ -246,10 +249,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <div class="toast" id="toast"></div><script>
 const LANGS = {
   en: {
-    dir: 'ltr',
-    nav_main: 'Main', nav_inv: 'Inventory', nav_ord: 'Orders', nav_mod: 'Modules',
-    page_inv: 'Inventory — Jewellery Catalogue', page_ord: 'Orders & Suppliers',
-    add_item: '+ Add item', add_order: '+ New order',
+    dir:'ltr',
+    nav_main:'Main', nav_inv:'Inventory', nav_ord:'Orders', nav_mod:'Modules',
+    page_inv:'Inventory — Jewellery Catalogue', page_ord:'Orders & Suppliers',
+    add_item:'+ Add item', add_order:'+ New order',
     sl1:'Total items', sl1s:'in stock', sl2:'Stock value', sl2s:'at purchase price',
     sl3:'Low stock', sl3s:'to reorder', sl4:'Tech sheets', sl4s:'items filled',
     ct_inv:'Item catalogue', ct_ord:'Supplier orders',
@@ -263,6 +266,8 @@ const LANGS = {
     st_pending:'Pending', st_transit:'In transit', st_received:'Received', st_cancelled:'Cancelled',
     sheet_compiled:'Compiled', sheet_none:'—',
     btn_cancel:'Cancel', btn_save_sheet:'Save technical sheet', btn_new_order:'Create order',
+    sh_img:'Product image (URL)', sh_img_ar:'صورة المنتج',
+    sh_img_placeholder:'https://... paste image link here',
     sh_metal:'Base metal', sh_dim:'Dimensions', sh_work:'Craft / Technique', sh_stones:'Precious stones', sh_extra:'Additional components',
     sh_metal_type:'Metal type', sh_metal_title:'Title / Purity', sh_metal_weight:'Weight (g)', sh_metal_finish:'Surface finish',
     sh_dim_ring:'Ring size', sh_dim_length:'Length', sh_dim_diam:'Diameter (mm)', sh_dim_height:'Height / Thickness (mm)', sh_dim_width:'Width (mm)', sh_dim_notes:'Dimension notes',
@@ -285,10 +290,10 @@ const LANGS = {
     toast_date_req:'Please enter the order date',
   },
   ar: {
-    dir: 'ltr',
-    nav_main: 'الرئيسية', nav_inv: 'المخزون', nav_ord: 'الطلبيات', nav_mod: 'وحدات',
-    page_inv: 'المخزون — كتالوج المجوهرات', page_ord: 'الطلبيات والموردون',
-    add_item: '+ إضافة صنف', add_order: '+ طلبية جديدة',
+    dir:'ltr',
+    nav_main:'الرئيسية', nav_inv:'المخزون', nav_ord:'الطلبيات', nav_mod:'وحدات',
+    page_inv:'المخزون — كتالوج المجوهرات', page_ord:'الطلبيات والموردون',
+    add_item:'+ إضافة صنف', add_order:'+ طلبية جديدة',
     sl1:'إجمالي الأصناف', sl1s:'في المخزن', sl2:'قيمة المخزون', sl2s:'بسعر الشراء',
     sl3:'مخزون منخفض', sl3s:'للإعادة الطلب', sl4:'البطاقات التقنية', sl4s:'أصناف مكتملة',
     ct_inv:'كتالوج الأصناف', ct_ord:'طلبيات الموردين',
@@ -302,6 +307,8 @@ const LANGS = {
     st_pending:'معلق', st_transit:'في الطريق', st_received:'مستلم', st_cancelled:'ملغي',
     sheet_compiled:'مكتملة', sheet_none:'—',
     btn_cancel:'إلغاء', btn_save_sheet:'حفظ البطاقة التقنية', btn_new_order:'إنشاء الطلبية',
+    sh_img:'صورة المنتج (رابط)', sh_img_ar:'Product image',
+    sh_img_placeholder:'https://... الصق رابط الصورة هنا',
     sh_metal:'المعدن الأساسي', sh_dim:'الأبعاد', sh_work:'الحرفة / التقنية', sh_stones:'الأحجار الكريمة', sh_extra:'مكونات إضافية',
     sh_metal_type:'نوع المعدن', sh_metal_title:'العيار / النقاء', sh_metal_weight:'الوزن (غ)', sh_metal_finish:'إنهاء السطح',
     sh_dim_ring:'مقاس الخاتم', sh_dim_length:'الطول', sh_dim_diam:'القطر (مم)', sh_dim_height:'الارتفاع / السماكة (مم)', sh_dim_width:'العرض (مم)', sh_dim_notes:'ملاحظات الأبعاد',
@@ -325,8 +332,8 @@ const LANGS = {
   }
 };
 
-let lang = 'en';
-function T(k){ return LANGS[lang][k] || LANGS['en'][k] || k; }
+let lang='en';
+function T(k){ return LANGS[lang][k]||LANGS['en'][k]||k; }
 
 function setLang(l){
   lang=l;
@@ -395,14 +402,14 @@ const STATUS_MAP={'Available':'st_avail','Out of stock':'st_oos','Low stock':'st
 
 let inventario=[
   {id:'ANL-001',nome:'Diamond solitaire ring',cat:'Rings',mat:'18kt Yellow Gold + Diamond',acquisto:1200,vendita:2950,qty:3,scorta:2,stato:'Available',
-    scheda:{metallo:{tipo:'Yellow Gold',titolo:'18 kt (750‰)',peso:'3.20',finitura:'Polished'},dimensioni:{misura_anello:'14',lunghezza:'',diametro:'',altezza:'5',larghezza:'3',note_dim:''},lavorazione:{tecnica:'Claw setting',stile:'Classic solitaire',trattamenti:'None',note_lav:'4-claw white gold setting'},pietre:[{tipo:'Diamond',forma:'Round brilliant',carati:'0.50',colore:'F',purezza:'VS1',provenienza:'GIA certified',note:'Cert. GIA n. 2416852310'}],extra:[]}},
+    scheda:{img:'',metallo:{tipo:'Yellow Gold',titolo:'18 kt (750‰)',peso:'3.20',finitura:'Polished'},dimensioni:{misura_anello:'14',lunghezza:'',diametro:'',altezza:'5',larghezza:'3',note_dim:''},lavorazione:{tecnica:'Claw setting',stile:'Classic solitaire',trattamenti:'None',note_lav:'4-claw white gold setting'},pietre:[{tipo:'Diamond',forma:'Round brilliant',carati:'0.50',colore:'F',purezza:'VS1',provenienza:'GIA certified',note:'Cert. GIA n. 2416852310'}],extra:[]}},
   {id:'COL-014',nome:'Diamond tennis necklace',cat:'Necklaces',mat:'18kt White Gold',acquisto:3400,vendita:7800,qty:1,scorta:2,stato:'Low stock',
-    scheda:{metallo:{tipo:'White Gold',titolo:'18 kt (750‰)',peso:'8.50',finitura:'Rhodium polished'},dimensioni:{misura_anello:'',lunghezza:'42 cm',diametro:'',altezza:'',larghezza:'3',note_dim:'Extension to 45 cm available'},lavorazione:{tecnica:'Channel setting',stile:'Classic tennis',trattamenti:'Rhodium plating',note_lav:'42 channel-set diamonds'},pietre:[{tipo:'Diamond',forma:'Round brilliant',carati:'2.00',colore:'G',purezza:'VS2',provenienza:'IGI certified',note:'42 pcs × 0.048ct each'}],extra:[]}},
+    scheda:{img:'',metallo:{tipo:'White Gold',titolo:'18 kt (750‰)',peso:'8.50',finitura:'Rhodium polished'},dimensioni:{misura_anello:'',lunghezza:'42 cm',diametro:'',altezza:'',larghezza:'3',note_dim:'Extension to 45 cm available'},lavorazione:{tecnica:'Channel setting',stile:'Classic tennis',trattamenti:'Rhodium plating',note_lav:'42 channel-set diamonds'},pietre:[{tipo:'Diamond',forma:'Round brilliant',carati:'2.00',colore:'G',purezza:'VS2',provenienza:'IGI certified',note:'42 pcs x 0.048ct each'}],extra:[]}},
   {id:'BRC-007',nome:'Rigid yellow gold bracelet',cat:'Bracelets',mat:'18kt Gold',acquisto:580,vendita:1290,qty:5,scorta:1,stato:'Available',scheda:null},
   {id:'ORC-022',nome:'Akoya pearl earrings',cat:'Earrings',mat:'Sterling Silver + Pearls',acquisto:95,vendita:240,qty:0,scorta:2,stato:'Out of stock',scheda:null},
   {id:'ORL-003',nome:"Automatic men's watch",cat:'Watches',mat:'Steel + Leather',acquisto:620,vendita:1450,qty:2,scorta:1,stato:'Available',scheda:null},
   {id:'ANL-009',nome:'Classic wedding band',cat:'Rings',mat:'18kt Gold',acquisto:180,vendita:390,qty:8,scorta:3,stato:'Available',
-    scheda:{metallo:{tipo:'Yellow Gold',titolo:'18 kt (750‰)',peso:'5.80',finitura:'Satin'},dimensioni:{misura_anello:'16',lunghezza:'',diametro:'',altezza:'',larghezza:'4',note_dim:'Available sizes 12–22'},lavorazione:{tecnica:'Casting',stile:'Classic',trattamenti:'None',note_lav:''},pietre:[],extra:[]}},
+    scheda:{img:'',metallo:{tipo:'Yellow Gold',titolo:'18 kt (750‰)',peso:'5.80',finitura:'Satin'},dimensioni:{misura_anello:'16',lunghezza:'',diametro:'',altezza:'',larghezza:'4',note_dim:'Available sizes 12-22'},lavorazione:{tecnica:'Casting',stile:'Classic',trattamenti:'None',note_lav:''},pietre:[],extra:[]}},
   {id:'COL-031',nome:'Ruby solitaire necklace',cat:'Necklaces',mat:'18kt Rose Gold + Ruby',acquisto:890,vendita:2100,qty:1,scorta:2,stato:'Low stock',scheda:null},
   {id:'BRC-012',nome:'Silver charm bracelet',cat:'Bracelets',mat:'Sterling Silver',acquisto:65,vendita:160,qty:12,scorta:3,stato:'Available',scheda:null},
   {id:'ORC-041',nome:'Sapphire stud earrings',cat:'Earrings',mat:'18kt White Gold + Sapphire',acquisto:420,vendita:980,qty:3,scorta:1,stato:'Available',scheda:null},
@@ -449,10 +456,15 @@ function updateStats(){
   document.getElementById('ord-spesa').textContent=fmt(ordini.filter(o=>o.stato==='Received').reduce((s,o)=>s+o.totale,0));
 }
 
+function thumbHtml(a){
+  if(a.scheda&&a.scheda.img) return `<img src="${a.scheda.img}" style="width:100%;height:100%;object-fit:cover">`;
+  return gemSvg;
+}
+
 function renderInv(data){
   document.getElementById('inv-body').innerHTML=data.map(a=>`
     <tr onclick="showItem('${a.id}')">
-      <td><div class="img-thumb">${gemSvg}</div></td>
+      <td><div class="img-thumb">${thumbHtml(a)}</div></td>
       <td style="font-family:monospace;font-size:11px;color:#888780">${a.id}</td>
       <td style="font-weight:500">${a.nome}</td>
       <td>${T(CAT_MAP[a.cat]||a.cat)}</td>
@@ -483,17 +495,14 @@ function filterInv(){
   const stato=document.getElementById('inv-stato').value;
   const catMap2={'All categories':'','كل الفئات':'','Rings':'Rings','خواتم':'Rings','Necklaces':'Necklaces','قلائد':'Necklaces','Bracelets':'Bracelets','أساور':'Bracelets','Earrings':'Earrings','أقراط':'Earrings','Watches':'Watches','ساعات':'Watches'};
   const stMap2={'All statuses':'','كل الحالات':'','Available':'Available','متاح':'Available','Out of stock':'Out of stock','نفد المخزون':'Out of stock','Low stock':'Low stock','مخزون منخفض':'Low stock'};
-  const catF=catMap2[cat]||cat;
-  const stF=stMap2[stato]||stato;
-  renderInv(inventario.filter(a=>(!q||a.id.toLowerCase().includes(q)||a.nome.toLowerCase().includes(q)||a.mat.toLowerCase().includes(q))&&(!catF||a.cat===catF)&&(!stF||a.stato===stF)));
+  renderInv(inventario.filter(a=>(!q||a.id.toLowerCase().includes(q)||a.nome.toLowerCase().includes(q)||a.mat.toLowerCase().includes(q))&&(!(catMap2[cat]||cat)||a.cat===(catMap2[cat]||cat))&&(!(stMap2[stato]||stato)||a.stato===(stMap2[stato]||stato))));
 }
 
 function filterOrd(){
   const q=document.getElementById('ord-search').value.toLowerCase();
   const stato=document.getElementById('ord-stato-f').value;
   const stMap2={'All statuses':'','كل الحالات':'','Pending':'Pending','معلق':'Pending','In transit':'In transit','في الطريق':'In transit','Received':'Received','مستلم':'Received','Cancelled':'Cancelled','ملغي':'Cancelled'};
-  const stF=stMap2[stato]||stato;
-  renderOrd(ordini.filter(o=>(!q||o.fornitore.toLowerCase().includes(q)||o.num.toLowerCase().includes(q))&&(!stF||o.stato===stF)));
+  renderOrd(ordini.filter(o=>(!q||o.fornitore.toLowerCase().includes(q)||o.num.toLowerCase().includes(q))&&(!(stMap2[stato]||stato)||o.stato===(stMap2[stato]||stato))));
 }
 
 let curSec='inventario';
@@ -505,8 +514,7 @@ function navigate(sec){
   curSec=sec;
   document.getElementById('page-title').textContent=sec==='inventario'?T('page_inv'):T('page_ord');
   document.getElementById('add-btn').textContent=sec==='inventario'?T('add_item'):T('add_order');
-  closeDetail();
-}function showItem(id){
+  closeDetail();function showItem(id){
   const a=inventario.find(x=>x.id===id);
   const mg=a.vendita>0?Math.round((a.vendita-a.acquisto)/a.vendita*100):0;
   const s=a.scheda;
@@ -515,20 +523,21 @@ function navigate(sec){
     prev=`<div style="margin-top:.75rem">
       <div style="font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">${T('det_sheet')}</div>
       <div style="background:#f9f8f4;border-radius:8px;padding:10px 12px">
-        ${s.metallo.tipo?`<div class="prev-row"><span>${LANGS.en.sh_metal_type}${lang==='ar'?' / '+LANGS.ar.sh_metal_type:''}</span><span>${s.metallo.tipo} ${s.metallo.titolo}</span></div>`:''}
-        ${s.metallo.peso?`<div class="prev-row"><span>${LANGS.en.sh_metal_weight}${lang==='ar'?' / '+LANGS.ar.sh_metal_weight:''}</span><span>${s.metallo.peso} g</span></div>`:''}
-        ${s.metallo.finitura?`<div class="prev-row"><span>${LANGS.en.sh_metal_finish}${lang==='ar'?' / '+LANGS.ar.sh_metal_finish:''}</span><span>${s.metallo.finitura}</span></div>`:''}
-        ${s.dimensioni.misura_anello?`<div class="prev-row"><span>${LANGS.en.sh_dim_ring}${lang==='ar'?' / '+LANGS.ar.sh_dim_ring:''}</span><span>${s.dimensioni.misura_anello}</span></div>`:''}
-        ${s.dimensioni.lunghezza?`<div class="prev-row"><span>${LANGS.en.sh_dim_length}${lang==='ar'?' / '+LANGS.ar.sh_dim_length:''}</span><span>${s.dimensioni.lunghezza}</span></div>`:''}
-        ${s.lavorazione.tecnica?`<div class="prev-row"><span>${LANGS.en.sh_work_tech}${lang==='ar'?' / '+LANGS.ar.sh_work_tech:''}</span><span>${s.lavorazione.tecnica}</span></div>`:''}
-        ${s.pietre.length?`<div class="prev-row"><span>${LANGS.en.sh_stones}${lang==='ar'?' / '+LANGS.ar.sh_stones:''}</span><span>${s.pietre.map(p=>p.tipo+(p.carati?' '+p.carati+'ct':'')).join(', ')}</span></div>`:''}
-        ${s.extra.length?`<div class="prev-row"><span>${LANGS.en.sh_extra}${lang==='ar'?' / '+LANGS.ar.sh_extra:''}</span><span>${s.extra.map(e=>e.nome).join(', ')}</span></div>`:''}
+        ${s.metallo&&s.metallo.tipo?`<div class="prev-row"><span>Metal</span><span>${s.metallo.tipo} ${s.metallo.titolo}</span></div>`:''}
+        ${s.metallo&&s.metallo.peso?`<div class="prev-row"><span>Weight</span><span>${s.metallo.peso} g</span></div>`:''}
+        ${s.metallo&&s.metallo.finitura?`<div class="prev-row"><span>Finish</span><span>${s.metallo.finitura}</span></div>`:''}
+        ${s.dimensioni&&s.dimensioni.misura_anello?`<div class="prev-row"><span>Ring size</span><span>${s.dimensioni.misura_anello}</span></div>`:''}
+        ${s.dimensioni&&s.dimensioni.lunghezza?`<div class="prev-row"><span>Length</span><span>${s.dimensioni.lunghezza}</span></div>`:''}
+        ${s.lavorazione&&s.lavorazione.tecnica?`<div class="prev-row"><span>Technique</span><span>${s.lavorazione.tecnica}</span></div>`:''}
+        ${s.pietre&&s.pietre.length?`<div class="prev-row"><span>Stones</span><span>${s.pietre.map(p=>p.tipo+(p.carati?' '+p.carati+'ct':'')).join(', ')}</span></div>`:''}
+        ${s.extra&&s.extra.length?`<div class="prev-row"><span>Extra</span><span>${s.extra.map(e=>e.nome).join(', ')}</span></div>`:''}
       </div>
     </div>`;
   }
+  const imgHtml=s&&s.img?`<img src="${s.img}" style="width:100%;height:100%;object-fit:contain;background:#f5f4f0">`:`<svg width="52" height="52" viewBox="0 0 56 56" fill="none"><polygon points="28,6 46,20 40,48 16,48 10,20" fill="#B4B2A9"/><polygon points="28,6 40,20 16,20" fill="#888780"/></svg>`;
   const bilbl=(en,ar)=>lang==='ar'?`${en} <span style="color:#B4B2A9;font-weight:400">${ar}</span>`:en;
   document.getElementById('detail-content').innerHTML=`
-    <div class="det-img"><svg width="52" height="52" viewBox="0 0 56 56" fill="none"><polygon points="28,6 46,20 40,48 16,48 10,20" fill="#B4B2A9"/><polygon points="28,6 40,20 16,20" fill="#888780"/></svg></div>
+    <div class="det-img">${imgHtml}</div>
     <div style="font-size:15px;font-weight:500;margin-bottom:6px">${a.nome}</div>
     <div style="margin-bottom:1rem">${bdg(a.stato)}</div>
     <div class="df"><label>${bilbl(T('det_code'),LANGS.ar.det_code)}</label><p style="font-family:monospace;font-size:12px">${a.id}</p></div>
@@ -576,7 +585,7 @@ let schedaId=null,sPietre=[],sExtra=[];
 function openScheda(id){
   const a=inventario.find(x=>x.id===id);
   schedaId=id;
-  const s=a.scheda||{metallo:{tipo:'',titolo:'',peso:'',finitura:''},dimensioni:{misura_anello:'',lunghezza:'',diametro:'',altezza:'',larghezza:'',note_dim:''},lavorazione:{tecnica:'',stile:'',trattamenti:'',note_lav:''},pietre:[],extra:[]};
+  const s=a.scheda||{img:'',metallo:{tipo:'',titolo:'',peso:'',finitura:''},dimensioni:{misura_anello:'',lunghezza:'',diametro:'',altezza:'',larghezza:'',note_dim:''},lavorazione:{tecnica:'',stile:'',trattamenti:'',note_lav:''},pietre:[],extra:[]};
   sPietre=JSON.parse(JSON.stringify(s.pietre));
   sExtra=JSON.parse(JSON.stringify(s.extra));
   document.getElementById('scheda-title').textContent='Technical Sheet — '+a.nome+(lang==='ar'?' / بطاقة تقنية':'');
@@ -585,9 +594,21 @@ function openScheda(id){
   const metalTypes=['Yellow Gold','White Gold','Rose Gold','Sterling Silver','Platinum','Steel','Titanium','Other'];
   const titles=['9kt (375‰)','14kt (585‰)','18kt (750‰)','22kt (916‰)','24kt (999‰)','925‰','950‰ Platinum','316L Steel','Other'];
   const finishes=['Polished','Satin','Matte','Rhodium polished','Rhodium satin','Burnished','Sandblasted','Mixed polished/satin'];
-  const techList=['Claw setting','Bezel setting','Pavé setting','Channel setting','Bar setting','Casting','Rolling','Stamping','Hand engraving','Filigree','Enamel','Other'];
+  const techList=['Claw setting','Bezel setting','Pave setting','Channel setting','Bar setting','Casting','Rolling','Stamping','Hand engraving','Filigree','Enamel','Other'];
   const treatList=['None','Rhodium plating','Gold plating','PVD','Electroplating','Burnishing','Oxidation','Other'];
   document.getElementById('scheda-body').innerHTML=`
+
+    <div class="scheda-section">
+      <div class="sec-title">Product image / صورة المنتج</div>
+      <div class="fg">
+        <label>${T('sh_img')}</label>
+        <input id="st-img" type="url" placeholder="${T('sh_img_placeholder')}" value="${s.img||''}" oninput="previewImg(this.value)">
+      </div>
+      <div id="img-preview-wrap" style="margin-top:8px;display:${s.img?'block':'none'}">
+        <img id="img-preview" src="${s.img||''}" class="img-preview" onerror="this.style.display='none'" onload="this.style.display='block'">
+      </div>
+    </div>
+
     <div class="scheda-section">
       <div class="sec-title">${secTitle('sh_metal','sh_metal')}</div>
       <div class="grid3">
@@ -601,6 +622,7 @@ function openScheda(id){
           <select id="st-fin"><option value="">— Select —</option>${sel(finishes,s.metallo.finitura)}</select></div>
       </div>
     </div>
+
     <div class="scheda-section">
       <div class="sec-title">${secTitle('sh_dim','sh_dim')}</div>
       <div class="grid3">
@@ -612,179 +634,10 @@ function openScheda(id){
         <div class="fg"><label>${fLabel('sh_dim_notes','sh_dim_notes')}</label><input id="sd-no" placeholder="e.g. available sizes..." value="${s.dimensioni.note_dim}"></div>
       </div>
     </div>
+
     <div class="scheda-section">
       <div class="sec-title">${secTitle('sh_work','sh_work')}</div>
-      <div class="grid3">
-        <div class="fg"><label>${fLabel('sh_work_tech','sh_work_tech')}</label>
-          <select id="sl-tec"><option value="">— Select —</option>${sel(techList,s.lavorazione.tecnica)}</select></div>
-        <div class="fg"><label>${fLabel('sh_work_style','sh_work_style')}</label><input id="sl-st" placeholder="e.g. Classic, Vintage..." value="${s.lavorazione.stile}"></div>
-        <div class="fg"><label>${fLabel('sh_work_treat','sh_work_treat')}</label>
-          <select id="sl-tr"><option value="">— Select —</option>${sel(treatList,s.lavorazione.trattamenti)}</select></div>
-      </div>
-      <div class="fg" style="margin-top:10px"><label>${fLabel('sh_work_notes','sh_work_notes')}</label>
-        <textarea id="sl-no" rows="2" placeholder="Additional craft details...">${s.lavorazione.note_lav}</textarea></div>
-    </div>
-    <div class="scheda-section">
-      <div class="sec-title">${secTitle('sh_stones','sh_stones')}</div>
-      <table class="pt">
-        <thead><tr>
-          <th>${LANGS.en.sh_stone_type}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_type+'</span>':''}</th>
-          <th>${LANGS.en.sh_stone_cut}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_cut+'</span>':''}</th>
-          <th>${LANGS.en.sh_stone_ct}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_ct+'</span>':''}</th>
-          <th>${LANGS.en.sh_stone_col}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_col+'</span>':''}</th>
-          <th>${LANGS.en.sh_stone_cl}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_cl+'</span>':''}</th>
-          <th>${LANGS.en.sh_stone_cert}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_cert+'</span>':''}</th>
-          <th>${LANGS.en.sh_stone_notes}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_stone_notes+'</span>':''}</th>
-          <th style="width:26px"></th>
-        </tr></thead>
-        <tbody id="pietre-body"></tbody>
-      </table>
-      <button class="add-btn" onclick="addPietra()">
-        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v5M4.5 7h5"/></svg>
-        ${T('add_stone')}
-      </button>
-    </div>
-    <div class="scheda-section">
-      <div class="sec-title">${secTitle('sh_extra','sh_extra')}</div>
-      <table class="pt">
-        <thead><tr>
-          <th>${LANGS.en.sh_extra_comp}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_extra_comp+'</span>':''}</th>
-          <th>${LANGS.en.sh_extra_mat}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_extra_mat+'</span>':''}</th>
-          <th style="width:60px">${LANGS.en.sh_extra_qty}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_extra_qty+'</span>':''}</th>
-          <th>${LANGS.en.sh_extra_notes}${lang==='ar'?'<span class="ar">'+LANGS.ar.sh_extra_notes+'</span>':''}</th>
-          <th style="width:26px"></th>
-        </tr></thead>
-        <tbody id="extra-body"></tbody>
-      </table>
-      <button class="add-btn" onclick="addExtra()">
-        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v5M4.5 7h5"/></svg>
-        ${T('add_comp')}
-      </button>
-    </div>`;
-  renderPietre(); renderExtra();
-  document.getElementById('scheda-overlay').classList.add('open');
+      <div class="​​​​​​​​​​​​​​​​
+
 }
 
-function renderPietre(){
-  document.getElementById('pietre-body').innerHTML=sPietre.length?sPietre.map((p,i)=>`
-    <tr>
-      <td><select onchange="sPietre[${i}].tipo=this.value"><option value="">—</option>${sel(STONE_TYPES,p.tipo)}</select></td>
-      <td><select onchange="sPietre[${i}].forma=this.value"><option value="">—</option>${sel(CUT_SHAPES,p.forma)}</select></td>
-      <td><input type="number" step="0.01" value="${p.carati}" placeholder="ct" oninput="sPietre[${i}].carati=this.value" style="width:62px"></td>
-      <td><input type="text" value="${p.colore}" placeholder="D–Z" oninput="sPietre[${i}].colore=this.value" style="width:54px"></td>
-      <td><input type="text" value="${p.purezza}" placeholder="IF–I3" oninput="sPietre[${i}].purezza=this.value" style="width:54px"></td>
-      <td><input type="text" value="${p.provenienza}" placeholder="GIA, IGI..." oninput="sPietre[${i}].provenienza=this.value"></td>
-      <td><input type="text" value="${p.note}" placeholder="Qty, lot..." oninput="sPietre[${i}].note=this.value"></td>
-      <td><button onclick="removePietra(${i})" style="background:none;border:none;cursor:pointer;color:#A32D2D;font-size:16px;line-height:1;padding:0 2px">×</button></td>
-    </tr>`).join('')
-  :`<tr><td colspan="8" style="color:#888780;font-size:12px;text-align:center;padding:12px">No stones added yet.</td></tr>`;
-}
-
-function renderExtra(){
-  document.getElementById('extra-body').innerHTML=sExtra.length?sExtra.map((e,i)=>`
-    <tr>
-      <td><input type="text" value="${e.nome}" placeholder="e.g. Clasp, Chain..." oninput="sExtra[${i}].nome=this.value"></td>
-      <td><input type="text" value="${e.materiale}" placeholder="e.g. 18kt Gold..." oninput="sExtra[${i}].materiale=this.value"></td>
-      <td><input type="text" value="${e.qty}" placeholder="1" oninput="sExtra[${i}].qty=this.value"></td>
-      <td><input type="text" value="${e.note}" placeholder="Notes..." oninput="sExtra[${i}].note=this.value"></td>
-      <td><button onclick="removeExtra(${i})" style="background:none;border:none;cursor:pointer;color:#A32D2D;font-size:16px;line-height:1;padding:0 2px">×</button></td>
-    </tr>`).join('')
-  :`<tr><td colspan="5" style="color:#888780;font-size:12px;text-align:center;padding:12px">No extra components.</td></tr>`;
-}
-
-function addPietra(){sPietre.push({tipo:'Diamond',forma:'Round brilliant',carati:'',colore:'',purezza:'',provenienza:'',note:''});renderPietre();}
-function removePietra(i){sPietre.splice(i,1);renderPietre();}
-function addExtra(){sExtra.push({nome:'',materiale:'',qty:'1',note:''});renderExtra();}
-function removeExtra(i){sExtra.splice(i,1);renderExtra();}
-
-function salvaScheda(){
-  const a=inventario.find(x=>x.id===schedaId);
-  a.scheda={
-    metallo:{tipo:document.getElementById('st-tipo').value,titolo:document.getElementById('st-titolo').value,peso:document.getElementById('st-peso').value,finitura:document.getElementById('st-fin').value},
-    dimensioni:{misura_anello:document.getElementById('sd-an').value,lunghezza:document.getElementById('sd-lu').value,diametro:document.getElementById('sd-di').value,altezza:document.getElementById('sd-al').value,larghezza:document.getElementById('sd-la').value,note_dim:document.getElementById('sd-no').value},
-    lavorazione:{tecnica:document.getElementById('sl-tec').value,stile:document.getElementById('sl-st').value,trattamenti:document.getElementById('sl-tr').value,note_lav:document.getElementById('sl-no').value},
-    pietre:JSON.parse(JSON.stringify(sPietre)),extra:JSON.parse(JSON.stringify(sExtra))
-  };
-  filterInv();updateStats();closeScheda();
-  showToast(T('toast_sheet_saved')+schedaId);
-  showItem(schedaId);
-}
-function closeScheda(){document.getElementById('scheda-overlay').classList.remove('open');}
-
-function openAddModal(){
-  if(curSec!=='inventario'){
-    document.getElementById('modal-box').innerHTML=`
-      <div class="modal-title">${T('m_new_order')}</div>
-      <div class="fr"><label>${T('m_supp')}</label><select id="o-f"><option>Gioielli Veneto Srl</option><option>Marco Oro Roma</option><option>Diamonds & Co. Milan</option><option>Northern Silver Ltd</option><option>Watch Imports Spa</option><option>Other</option></select></div>
-      <div class="fg2">
-        <div class="fr"><label>${T('m_odate')}</label><input id="o-d" type="date"></div>
-        <div class="fr"><label>${T('m_odeliv')}</label><input id="o-c" type="date"></div>
-      </div>
-      <div class="fg2">
-        <div class="fr"><label>${T('m_oitems')}</label><input id="o-a" type="number" value="1"></div>
-        <div class="fr"><label>${T('m_ototal')}</label><input id="o-t" type="number" value="0"></div>
-      </div>
-      <div class="fr"><label>${T('m_onotes')}</label><textarea id="o-n" rows="2"></textarea></div>
-      <div class="modal-footer">
-        <button class="btn" onclick="closeModal()">${T('btn_cancel')}</button>
-        <button class="btn btn-primary" onclick="salvaOrdine()">${T('btn_new_order')}</button>
-      </div>`;
-    setTimeout(()=>{const t=new Date().toISOString().split('T')[0];if(document.getElementById('o-d'))document.getElementById('o-d').value=t;},10);
-    document.getElementById('modal-overlay').classList.add('open');
-    return;
-  }
-  document.getElementById('modal-box').innerHTML=`
-    <div class="modal-title">${T('m_new_item')}</div>
-    <div class="fg2">
-      <div class="fr"><label>${T('m_code')}</label><input id="m-id" placeholder="RNG-xxx"></div>
-      <div class="fr"><label>${T('m_cat')}</label>
-        <select id="m-cat"><option value="Rings">${T('cat_rings')}</option><option value="Necklaces">${T('cat_necklaces')}</option><option value="Bracelets">${T('cat_bracelets')}</option><option value="Earrings">${T('cat_earrings')}</option><option value="Watches">${T('cat_watches')}</option></select>
-      </div>
-    </div>
-    <div class="fr"><label>${T('m_desc')}</label><input id="m-nom" placeholder="Item commercial name"></div>
-    <div class="fr"><label>${T('m_mat')}</label><input id="m-mat" placeholder="e.g. 18kt Gold + Diamond"></div>
-    <div class="fg2">
-      <div class="fr"><label>${T('m_buy')}</label><input id="m-acq" type="number" placeholder="0"></div>
-      <div class="fr"><label>${T('m_sell')}</label><input id="m-ven" type="number" placeholder="0"></div>
-    </div>
-    <div class="fg2">
-      <div class="fr"><label>${T('m_qty')}</label><input id="m-qty" type="number" value="1"></div>
-      <div class="fr"><label>${T('m_min')}</label><input id="m-sc" type="number" value="1"></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" onclick="closeModal()">${T('btn_cancel')}</button>
-      <button class="btn btn-primary" onclick="salvaArticolo()">${T('m_save_item')}</button>
-    </div>`;
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function salvaArticolo(){
-  const id=document.getElementById('m-id').value.trim();
-  const nome=document.getElementById('m-nom').value.trim();
-  if(!id||!nome){showToast(T('toast_fill_req'));return;}
-  const qty=parseInt(document.getElementById('m-qty').value)||0;
-  const sc=parseInt(document.getElementById('m-sc').value)||1;
-  const stato=qty===0?'Out of stock':qty<=sc?'Low stock':'Available';
-  inventario.push({id,nome,cat:document.getElementById('m-cat').value,mat:document.getElementById('m-mat').value||'—',acquisto:parseFloat(document.getElementById('m-acq').value)||0,vendita:parseFloat(document.getElementById('m-ven').value)||0,qty,scorta:sc,stato,scheda:null});
-  filterInv();updateStats();closeModal();
-  showToast(T('toast_fill'));
-  setTimeout(()=>{showItem(id);setTimeout(()=>openScheda(id),350);},400);
-}
-
-function salvaOrdine(){
-  const data=document.getElementById('o-d').value;
-  if(!data){showToast(T('toast_date_req'));return;}
-  const num='ORD-'+Date.now().toString().slice(-6);
-  const fd=d=>{if(!d)return'—';const p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0];};
-  ordini.unshift({num,fornitore:document.getElementById('o-f').value,data:fd(data),consegna:fd(document.getElementById('o-c').value),articoli:parseInt(document.getElementById('o-a').value)||0,totale:parseFloat(document.getElementById('o-t').value)||0,stato:'Pending'});
-  filterOrd();updateStats();closeModal();showToast('Order '+num+' created');
-}
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
-
-renderInv(inventario);
-renderOrd(ordini);
-updateStats();
-applyTranslations();
-</script>
-</body>
-</html>
