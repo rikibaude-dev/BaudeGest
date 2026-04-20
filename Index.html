@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AureaGest</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,sans-serif;background:#f5f4f0;color:#1a1a18}.app{display:flex;height:100vh}.sb{width:200px;background:#fff;border-right:.5px solid rgba(0,0,0,.1);display:flex;flex-direction:column;padding:1rem 0;flex-shrink:0}.logo{padding:0 1rem 1.25rem;font-size:15px;font-weight:500;display:flex;align-items:center;gap:8px}.gem{width:26px;height:26px;background:#B4B2A9;border-radius:6px;display:flex;align-items:center;justify-content:center}.ni{display:flex;align-items:center;gap:8px;padding:.4rem .5rem;margin:0 .5rem 2px;border-radius:7px;cursor:pointer;font-size:13px;color:#5F5E5A}.ni:hover{background:#f5f4f0}.ni.on{background:#F1EFE8;color:#2C2C2A;font-weight:500}.nic{width:16px;height:16px;opacity:.7;flex-shrink:0}.nbot{margin-top:auto;padding:0 .5rem}.main{flex:1;display:flex;flex-direction:column;overflow:hidden}.topbar{background:#fff;border-bottom:.5px solid rgba(0,0,0,.1);padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}.btn{padding:6px 13px;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;border:.5px solid rgba(0,0,0,.2);background:#fff;color:#1a1a18;font-family:inherit}.btnp{background:#2C2C2A;color:#F1EFE8;border-color:#2C2C2A}.btnd{color:#A32D2D;border-color:#F7C1C1}.cnt{flex:1;overflow-y:auto;padding:1.5rem}.sec{display:none}.sec.on{display:block}.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}.sc{background:#eeeee8;border-radius:8px;padding:1rem}.slbl{font-size:11px;color:#5F5E5A;margin-bottom:4px}.sval{font-size:22px;font-weight:500}.ssub{font-size:11px;color:#888780;margin-top:2px}.card{background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:12px;padding:1.25rem;margin-bottom:1rem}.tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl th{text-align:left;font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;padding:0 .75rem .5rem;border-bottom:.5px solid rgba(0,0,0,.1)}.tbl td{padding:.6rem .75rem;border-bottom:.5px solid rgba(0,0,0,.07)}.tbl tbody tr:hover td{background:#f9f8f4;cursor:pointer}.bdg{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500}.bg{background:#EAF3DE;color:#3B6D11}.ba{background:#FAEEDA;color:#854F0B}.br{background:#FCEBEB;color:#A32D2D}.bgy{background:#F1EFE8;color:#5F5E5A}.bb{background:#E6F1FB;color:#185FA5}.bp{background:#EEEDFE;color:#534AB7}.sbar{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}.sbar input,.sbar select{padding:6px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:12px;background:#fff;color:#1a1a18;font-family:inherit}.sbar input{flex:1;min-width:160px}.ith{width:32px;height:32px;border-radius:6px;background:#D3D1C7;display:inline-flex;align-items:center;justify-content:center;overflow:hidden}.ith img{width:100%;height:100%;object-fit:cover}.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:300;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto}.ovl.on{display:flex}.sched{background:#fff;border-radius:14px;width:720px;max-width:100%}.shd{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:.5px solid rgba(0,0,0,.1)}.shd h2{font-size:15px;font-weight:500}.scl{background:none;border:none;font-size:22px;cursor:pointer;color:#888780}.sbdy{padding:1.5rem}.ssec{margin-bottom:1.5rem}.stit{font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;padding-bottom:6px;border-bottom:.5px solid rgba(0,0,0,.08)}.fg{display:flex;flex-direction:column;gap:4px}.fg label{font-size:10px;font-weight:500;color:#888780}.fg input,.fg select,.fg textarea{padding:7px 10px;border:.5px solid rgba(0,0,0,.18);border-radius:7px;font-size:13px;background:#fff;color:#1a1a18;font-family:inherit;width:100%}.fg textarea{resize:vertical;min-height:56px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.pt{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}.pt th{font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;padding:0 6px 6px;text-align:left;border-bottom:.5px solid rgba(0,0,0,.1)}.pt td{padding:4px 3px;border-bottom:.5px solid rgba(0,0,0,.06)}.pt td input,.pt td select{width:100%;padding:5px 6px;border:.5px solid rgba(0,0,0,.15);border-radius:6px;font-size:12px;color:#1a1a18;font-family:inherit;background:#fff}.addb{display:flex;align-items:center;gap:5px;font-size:12px;color:#185FA5;cursor:pointer;background:none;border:none;font-family:inherit;padding:4px 0}.sft{padding:1rem 1.5rem;border-top:.5px solid rgba(0,0,0,.1);display:flex;justify-content:flex-end;gap:8px}.dp{position:fixed;right:0;top:0;bottom:0;width:290px;background:#fff;border-left:.5px solid rgba(0,0,0,.1);padding:1.25rem;overflow-y:auto;transform:translateX(100%);transition:transform .2s;z-index:100;box-shadow:-4px 0 20px rgba(0,0,0,.08)}.dp.on{transform:translateX(0)}.dcl{float:right;cursor:pointer;font-size:20px;color:#888780;background:none;border:none}.df{margin-bottom:.875rem}.df label{font-size:10px;font-weight:500;color:#888780;display:block;margin-bottom:3px}.df p{font-size:13px}.dim{width:100%;height:150px;background:#D3D1C7;border-radius:10px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;overflow:hidden}.dim img{width:100%;height:100%;object-fit:contain;background:#f5f4f0}.pr{display:flex;justify-content:space-between;padding:4px 0;border-bottom:.5px solid rgba(0,0,0,.06);font-size:12px}.pr:last-child{border-bottom:none}.pr span:first-child{color:#888780}.pr span:last-child{font-weight:500;text-align:right}.movl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;align-items:center;justify-content:center}.movl.on{display:flex}.mod{background:#fff;border-radius:12px;padding:1.5rem;width:440px;max-width:95vw;max-height:90vh;overflow-y:auto}.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mft{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem}.tst{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:#2C2C2A;color:#F1EFE8;padding:10px 20px;border-radius:8px;font-size:13px;transition:transform .3s;z-index:500;white-space:nowrap}.tst.on{transform:translateX(-50%) translateY(0)}.ipv{width:100%;max-height:170px;object-fit:contain;border-radius:8px;margin-top:8px;background:#f5f4f0}@media(max-width:700px){.sb{width:50px}.logo span{display:none}.logo{padding:0 .75rem 1.25rem;justify-content:center}.ni{justify-content:center;padding:.5rem}.ni span{display:none}.sgrid{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr}}</style></head>
+<body><div class="app"><aside class="sb"><div class="logo"><div class="gem"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><polygon points="8,2 13,6 11,13 5,13 3,6" fill="#888780"/><polygon points="8,2 11,6 5,6" fill="#5F5E5A"/></svg></div><span>AureaGest</span></div><div style="padding:0 .5rem"><div class="ni on" id="nv" onclick="nav('inv')"><svg class="nic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg><span>Inventory</span></div><div class="ni" id="no" onclick="nav('ord')"><svg class="nic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/><circle cx="13" cy="11" r="2.5"/><path d="M13 9.5V11l1 1"/></svg><span>Orders</span></div></div><div class="nbot"><div class="ni" onclick="toast('Upgrade to add modules')"><svg class="nic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v6M5 8h6"/></svg><span>Modules</span></div></div></aside><div class="main"><div class="topbar"><span style="font-size:15px;font-weight:500" id="ptit">Inventory</span><button class="btn btnp" id="addb" onclick="openAdd()">+ Add item</button></div><div class="cnt"><div class="sec on" id="sinv"><div class="sgrid"><div class="sc"><div class="slbl">Total items</div><div class="sval" id="sv1">—</div><div class="ssub">in stock</div></div><div class="sc"><div class="slbl">Stock value</div><div class="sval" id="sv2">—</div><div class="ssub">at purchase price</div></div><div class="sc"><div class="slbl">Low stock</div><div class="sval" id="sv3" style="color:#A32D2D">—</div><div class="ssub">to reorder</div></div><div class="sc"><div class="slbl">Tech sheets</div><div class="sval" id="sv4">—</div><div class="ssub">compiled</div></div></div><div class="card"><div style="font-size:13px;font-weight:500;margin-bottom:1rem">Item catalogue</div><div class="sbar"><input id="is" placeholder="Search code, name..." oninput="fi()"><select id="ic" onchange="fi()"><option value="">All categories</option><option value="Rings">Rings</option><option value="Necklaces">Necklaces</option><option value="Bracelets">Bracelets</option><option value="Earrings">Earrings</option><option value="Watches">Watches</option></select><select id="ist" onchange="fi()"><option value="">All statuses</option><option value="Available">Available</option><option value="Out of stock">Out of stock</option><option value="Low stock">Low stock</option></select></div><table class="tbl"><thead><tr><th></th><th>Code</th><th>Description</th><th>Category</th><th>Purchase</th><th>Sale</th><th>Qty</th><th>Sheet</th><th>Status</th></tr></thead><tbody id="ib"></tbody></table></div></div><div class="sec" id="sord"><div class="sgrid"><div class="sc"><div class="slbl">Open orders</div><div class="sval" id="ov1">—</div><div class="ssub">pending/transit</div></div><div class="sc"><div class="slbl">In transit</div><div class="sval" id="ov2">—</div><div class="ssub">shipped</div></div><div class="sc"><div class="slbl">Received</div><div class="sval" id="ov3">—</div></div><div class="sc"><div class="slbl">Spend (month)</div><div class="sval" id="ov4">—</div></div></div><div class="card"><div style="font-size:13px;font-weight:500;margin-bottom:1rem">Supplier orders</div><div class="sbar"><input id="os" placeholder="Search supplier..." oninput="fo()"><select id="ost" onchange="fo()"><option value="">All statuses</option><option value="Pending">Pending</option><option value="In transit">In transit</option><option value="Received">Received</option><option value="Cancelled">Cancelled</option></select></div><table class="tbl"><thead><tr><th>Order #</th><th>Supplier</th><th>Date</th><th>Delivery</th><th>Items</th><th>Total</th><th>Status</th></tr></thead><tbody id="ob"></tbody></table></div></div></div></div></div><div class="dp" id="dp"><button class="dcl" onclick="closeD()">×</button><div id="dc"></div></div><div class="ovl" id="so" onclick="if(event.target===this)closeS()"><div class="sched"><div class="shd"><h2 id="shtit">Technical Sheet</h2><button class="scl" onclick="closeS()">×</button></div><div class="sbdy" id="sb"></div><div class="sft"><button class="btn" onclick="closeS()">Cancel</button><button class="btn btnp" onclick="saveS()">Save sheet</button></div></div></div><div class="movl" id="mo" onclick="if(event.target===this)closeM()"><div class="mod" id="mb"></div></div><div class="tst" id="tst"></div>
+<script>
+const gem='<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><polygon points="8,2 13,6 11,13 5,13 3,6" fill="#B4B2A9"/><polygon points="8,2 11,6 5,6" fill="#5F5E5A"/></svg>';
+const STONES=['Diamond','Ruby','Emerald','Sapphire','Pearl','Amethyst','Topaz','Aquamarine','Citrine','Garnet','Opal','Turquoise','Other'];
+const CUTS=['Round brilliant','Princess','Oval','Pear','Marquise','Cushion','Emerald cut','Cabochon','Other'];
+const METALS=['Yellow Gold','White Gold','Rose Gold','Sterling Silver','Platinum','Steel','Titanium','Other'];
+const PURITIES=['9kt','14kt','18kt','22kt','24kt','925 Silver','950 Platinum','316L Steel','Other'];
+const FINS=['Polished','Satin','Matte','Rhodium polished','Rhodium satin','Burnished','Sandblasted','Other'];
+const TECHS=['Claw setting','Bezel setting','Pave setting','Channel setting','Casting','Stamping','Hand engraving','Filigree','Other'];
+const TREATS=['None','Rhodium plating','Gold plating','PVD','Electroplating','Burnishing','Other'];
+const BDGC={'Available':'bg','Out of stock':'br','Low stock':'ba','In transit':'bb','Pending':'ba','Received':'bg','Cancelled':'bgy'};
+const fmt=n=>'€'+Number(n).toLocaleString('en-US');
+const sel=(a,v)=>a.map(x=>'<option'+(x===v?' selected':'')+'>'+x+'</option>').join('');
+
+let inv=[
+{id:'ANL-001',n:'Diamond solitaire ring',c:'Rings',m:'18kt Yellow Gold + Diamond',b:1200,s:2950,q:3,mn:2,st:'Available',sh:{img:'',me:{t:'Yellow Gold',p:'18kt',w:'3.20',f:'Polished'},di:{r:'14',l:'',d:'',h:'5',w:'3',n:''},la:{t:'Claw setting',s:'Classic solitaire',tr:'None',n:'4-claw white gold'},pi:[{t:'Diamond',f:'Round brilliant',c:'0.50',co:'F',cl:'VS1',pr:'GIA certified',n:'GIA 2416852310'}],ex:[]}},
+{id:'COL-014',n:'Diamond tennis necklace',c:'Necklaces',m:'18kt White Gold',b:3400,s:7800,q:1,mn:2,st:'Low stock',sh:{img:'',me:{t:'White Gold',p:'18kt',w:'8.50',f:'Rhodium polished'},di:{r:'',l:'42 cm',d:'',h:'',w:'3',n:'Extension to 45cm'},la:{t:'Channel setting',s:'Classic tennis',tr:'Rhodium plating',n:'42 diamonds'},pi:[{t:'Diamond',f:'Round brilliant',c:'2.00',co:'G',cl:'VS2',pr:'IGI certified',n:'42 pcs x 0.048ct'}],ex:[]}},
+{id:'BRC-007',n:'Rigid yellow gold bracelet',c:'Bracelets',m:'18kt Gold',b:580,s:1290,q:5,mn:1,st:'Available',sh:null},
+{id:'ORC-022',n:'Akoya pearl earrings',c:'Earrings',m:'Sterling Silver + Pearls',b:95,s:240,q:0,mn:2,st:'Out of stock',sh:null},
+{id:'ORL-003',n:'Automatic mens watch',c:'Watches',m:'Steel + Leather',b:620,s:1450,q:2,mn:1,st:'Available',sh:null},
+{id:'ANL-009',n:'Classic wedding band',c:'Rings',m:'18kt Gold',b:180,s:390,q:8,mn:3,st:'Available',sh:{img:'',me:{t:'Yellow Gold',p:'18kt',w:'5.80',f:'Satin'},di:{r:'16',l:'',d:'',h:'',w:'4',n:'Sizes 12-22'},la:{t:'Casting',s:'Classic',tr:'None',n:''},pi:[],ex:[]}},
+{id:'COL-031',n:'Ruby solitaire necklace',c:'Necklaces',m:'18kt Rose Gold + Ruby',b:890,s:2100,q:1,mn:2,st:'Low stock',sh:null},
+{id:'BRC-012',n:'Silver charm bracelet',c:'Bracelets',m:'Sterling Silver',b:65,s:160,q:12,mn:3,st:'Available',sh:null},
+{id:'ORC-041',n:'Sapphire stud earrings',c:'Earrings',m:'18kt White Gold + Sapphire',b:420,s:980,q:3,mn:1,st:'Available',sh:null},
+{id:'ORL-011',n:'Quartz ladies watch',c:'Watches',m:'Gold-tone Steel',b:210,s:490,q:0,mn:2,st:'Out of stock',sh:null},
+];
+
+let ord=[
+{num:'ORD-2604-01',sup:'Gioielli Veneto Srl',dt:'02/04/2026',dl:'20/04/2026',it:6,tot:3240,st:'In transit'},
+{num:'ORD-2604-02',sup:'Marco Oro Roma',dt:'05/04/2026',dl:'25/04/2026',it:3,tot:1850,st:'Pending'},
+{num:'ORD-2604-03',sup:'Diamonds Co. Milan',dt:'08/04/2026',dl:'30/04/2026',it:2,tot:7600,st:'Pending'},
+{num:'ORD-2603-08',sup:'Gioielli Veneto Srl',dt:'18/03/2026',dl:'01/04/2026',it:9,tot:4120,st:'Received'},
+{num:'ORD-2603-07',sup:'Northern Silver Ltd',dt:'15/03/2026',dl:'28/03/2026',it:15,tot:980,st:'Received'},
+{num:'ORD-2603-06',sup:'Watch Imports Spa',dt:'10/03/2026',dl:'24/03/2026',it:4,tot:2600,st:'Received'},
+{num:'ORD-2603-05',sup:'Pearls and Stones Srl',dt:'05/03/2026',dl:'20/03/2026',it:8,tot:760,st:'Cancelled'},
+];
+
+function bdg(s){return'<span class="bdg '+(BDGC[s]||'bgy')+'">'+s+'</span>';}
+function toast(m){const t=document.getElementById('tst');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600);}
+
+function uStats(){
+  document.getElementById('sv1').textContent=inv.reduce((s,a)=>s+a.q,0);
+  document.getElementById('sv2').textContent=fmt(inv.reduce((s,a)=>s+a.b*a.q,0));
+  document.getElementById('sv3').textContent=inv.filter(a=>a.q===0||a.q<=a.mn).length;
+  document.getElementById('sv4').textContent=inv.filter(a=>a.sh).length+'/'+inv.length;
+  document.getElementById('ov1').textContent=ord.filter(o=>o.st==='Pending'||o.st==='In transit').length;
+  document.getElementById('ov2').textContent=ord.filter(o=>o.st==='In transit').length;
+  document.getElementById('ov3').textContent=ord.filter(o=>o.st==='Received').length;
+  document.getElementById('ov4').textContent=fmt(ord.filter(o=>o.st==='Received').reduce((s,o)=>s+o.tot,0));
+}
+
+function rInv(data){
+  document.getElementById('ib').innerHTML=data.map(a=>{
+    const th=a.sh&&a.sh.img?'<img src="'+a.sh.img+'" style="width:100%;height:100%;object-fit:cover">':gem;
+    return'<tr onclick="showI(\''+a.id+'\')">'
+    +'<td><div class="ith">'+th+'</div></td>'
+    +'<td style="font-family:monospace;font-size:11px;color:#888780">'+a.id+'</td>'
+    +'<td style="font-weight:500">'+a.n+'</td><td>'+a.c+'</td>'
+    +'<td>'+fmt(a.b)+'</td><td style="font-weight:500">'+fmt(a.s)+'</td>'
+    +'<td style="text-align:center;font-weight:500">'+a.q+'</td>'
+    +'<td style="text-align:center">'+(a.sh?'<span class="bdg bp">✓</span>':'<span class="bdg bgy">—</span>')+'</td>'
+    +'<td>'+bdg(a.st)+'</td></tr>';
+  }).join('');
+}
+
+function rOrd(data){
+  document.getElementById('ob').innerHTML=data.map(o=>'<tr onclick="showO(\''+o.num+'\')">'
+    +'<td style="font-family:monospace;font-size:11px;color:#888780">'+o.num+'</td>'
+    +'<td style="font-weight:500">'+o.sup+'</td>'
+    +'<td style="color:#5F5E5A">'+o.dt+'</td><td>'+o.dl+'</td>'
+    +'<td style="text-align:center">'+o.it+'</td>'
+    +'<td style="font-weight:500">'+fmt(o.tot)+'</td>'
+    +'<td>'+bdg(o.st)+'</td></tr>').join('');
+}
+
+function fi(){
+  const q=document.getElementById('is').value.toLowerCase();
+  const c=document.getElementById('ic').value;
+  const s=document.getElementById('ist').value;
+  rInv(inv.filter(a=>(!q||a.id.toLowerCase().includes(q)||a.n.toLowerCase().includes(q)||a.m.toLowerCase().includes(q))&&(!c||a.c===c)&&(!s||a.st===s)));
+}
+
+function fo(){
+  const q=document.getElementById('os').value.toLowerCase();
+  const s=document.getElementById('ost').value;
+  rOrd(ord.filter(o=>(!q||o.sup.toLowerCase().includes(q)||o.num.toLowerCase().includes(q))&&(!s||o.st===s)));
+}
+
+let cur='inv';
+function nav(p){
+  document.getElementById('nv').classList.toggle('on',p==='inv');
+  document.getElementById('no').classList.toggle('on',p==='ord');
+  document.getElementById('sinv').classList.toggle('on',p==='inv');
+  document.getElementById('sord').classList.toggle('on',p==='ord');
+  cur=p;
+  document.getElementById('ptit').textContent=p==='inv'?'Inventory':'Orders & Suppliers';
+  document.getElementById('addb').textContent=p==='inv'?'+ Add item':'+ New order';
+  closeD();
+}
+
+function showI(id){
+  const a=inv.find(x=>x.id===id);
+  const s=a.sh;
+  const mg=a.s>0?Math.round((a.s-a.b)/a.s*100):0;
+  const img=s&&s.img?'<img src="'+s.img+'" style="width:100%;height:100%;object-fit:contain;background:#f5f4f0">':'<svg width="52" height="52" viewBox="0 0 56 56" fill="none"><polygon points="28,6 46,20 40,48 16,48 10,20" fill="#B4B2A9"/><polygon points="28,6 40,20 16,20" fill="#888780"/></svg>';
+  let pv='';
+  if(s){pv='<div style="margin-top:.75rem"><div style="font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;margin-bottom:6px">Technical sheet</div><div style="background:#f9f8f4;border-radius:8px;padding:10px 12px">'
+    +(s.me&&s.me.t?'<div class="pr"><span>Metal</span><span>'+s.me.t+' '+s.me.p+'</span></div>':'')
+    +(s.me&&s.me.w?'<div class="pr"><span>Weight</span><span>'+s.me.w+' g</span></div>':'')
+    +(s.di&&s.di.r?'<div class="pr"><span>Ring size</span><span>'+s.di.r+'</span></div>':'')
+    +(s.di&&s.di.l?'<div class="pr"><span>Length</span><span>'+s.di.l+'</span></div>':'')
+    +(s.la&&s.la.t?'<div class="pr"><span>Technique</span><span>'+s.la.t+'</span></div>':'')
+    +(s.pi&&s.pi.length?'<div class="pr"><span>Stones</span><span>'+s.pi.map(p=>p.t+(p.c?' '+p.c+'ct':'')).join(', ')+'</span></div>':'')
+    +'</div></div>';}
+  document.getElementById('dc').innerHTML='<div class="dim">'+img+'</div>'
+    +'<div style="font-size:15px;font-weight:500;margin-bottom:6px">'+a.n+'</div>'
+    +'<div style="margin-bottom:1rem">'+bdg(a.st)+'</div>'
+    +'<div class="df"><label>Code</label><p style="font-family:monospace;font-size:12px">'+a.id+'</p></div>'
+    +'<div class="df"><label>Category</label><p>'+a.c+'</p></div>'
+    +'<div class="df"><label>Material</label><p>'+a.m+'</p></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.875rem">'
+    +'<div class="df"><label>Purchase</label><p style="font-size:14px;font-weight:500">'+fmt(a.b)+'</p></div>'
+    +'<div class="df"><label>Sale</label><p style="font-size:14px;font-weight:500">'+fmt(a.s)+'</p></div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.875rem">'
+    +'<div class="df"><label>Margin</label><p style="font-weight:500;color:#3B6D11">'+mg+'%</p></div>'
+    +'<div class="df"><label>In stock</label><p style="font-size:18px;font-weight:500">'+a.q+' pcs</p></div></div>'
+    +pv
+    +'<div style="display:flex;flex-direction:column;gap:8px;margin-top:1rem">'
+    +'<button class="btn btnp" onclick="openS(\''+a.id+'\')">'+( s?'Edit technical sheet':'+ Fill technical sheet')+'</button>'
+    +'<button class="btn btnd" onclick="toast(\'Restock order created for '+a.id+'\')">Create restock order</button></div>';
+  document.getElementById('dp').classList.add('on');
+}
+
+function showO(num){
+  const o=ord.find(x=>x.num===num);
+  document.getElementById('dc').innerHTML='<div style="font-size:15px;font-weight:500;margin-bottom:6px">'+o.sup+'</div>'
+    +'<div style="margin-bottom:1rem">'+bdg(o.st)+'</div>'
+    +'<div class="df"><label>Order #</label><p style="font-family:monospace;font-size:12px">'+o.num+'</p></div>'
+    +'<div class="df"><label>Date</label><p>'+o.dt+'</p></div>'
+    +'<div class="df"><label>Delivery</label><p style="font-weight:500">'+o.dl+'</p></div>'
+    +'<div class="df"><label>Items</label><p>'+o.it+'</p></div>'
+    +'<div class="df"><label>Total</label><p style="font-size:20px;font-weight:500">'+fmt(o.tot)+'</p></div>'
+    +'<div style="display:flex;gap:8px;margin-top:1.25rem">'
+    +'<button class="btn btnp" style="flex:1" onclick="markR(\''+o.num+'\')">Mark as received</button>'
+    +'<button class="btn" style="flex:1" onclick="closeD()">Close</button></div>';
+  document.getElementById('dp').classList.add('on');
+}
+
+function markR(num){
+  const o=ord.find(x=>x.num===num);
+  if(o&&o.st!=='Received'){o.st='Received';rOrd(ord);uStats();toast('Marked as received: '+num);closeD();}
+}
+function closeD(){document.getElementById('dp').classList.remove('on');}
+
+let sId=null,sP=[],sE=[];
+function openS(id){
+  const a=inv.find(x=>x.id===id);
+  sId=id;
+  const s=a.sh||{img:'',me:{t:'',p:'',w:'',f:''},di:{r:'',l:'',d:'',h:'',w:'',n:''},la:{t:'',s:'',tr:'',n:''},pi:[],ex:[]};
+  sP=JSON.parse(JSON.stringify(s.pi));
+  sE=JSON.parse(JSON.stringify(s.ex));
+  document.getElementById('shtit').textContent='Technical Sheet — '+a.n;
+  document.getElementById('sb').innerHTML=
+    '<div class="ssec"><div class="stit">Product image (URL)</div>'
+    +'<div class="fg"><label>Image URL</label><input id="si" type="url" placeholder="https://... paste image link" value="'+(s.img||'')+'" oninput="pvImg(this.value)"></div>'
+    +'<div id="ipw" style="margin-top:8px;display:'+(s.img?'block':'none')+'">'
+    +'<img id="ipv" src="'+(s.img||'')+'" class="ipv"></div></div>'
+    +'<div class="ssec"><div class="stit">Base metal</div><div class="g3">'
+    +'<div class="fg"><label>Metal type</label><select id="mt"><option value="">—</option>'+sel(METALS,s.me.t)+'</select></div>'
+    +'<div class="fg"><label>Purity</label><select id="mp"><option value="">—</option>'+sel(PURITIES,s.me.p)+'</select></div>'
+    +'<div class="fg"><label>Weight (g)</label><input id="mw" type="number" step="0.01" value="'+s.me.w+'" placeholder="0.00"></div>'
+    +'<div class="fg" style="grid-column:1/-1"><label>Finish</label><select id="mf"><option value="">—</option>'+sel(FINS,s.me.f)+'</select></div>'
+    +'</div></div>'
+    +'<div class="ssec"><div class="stit">Dimensions</div><div class="g3">'
+    +'<div class="fg"><label>Ring size</label><input id="dr" value="'+s.di.r+'" placeholder="e.g. 14"></div>'
+    +'<div class="fg"><label>Length</label><input id="dl" value="'+s.di.l+'" placeholder="e.g. 42 cm"></div>'
+    +'<div class="fg"><label>Diameter</label><input id="dd" value="'+s.di.d+'" placeholder="e.g. 15mm"></div>'
+    +'<div class="fg"><label>Height</label><input id="dh" value="'+s.di.h+'" placeholder="e.g. 5mm"></div>'
+    +'<div class="fg"><label>Width</label><input id="dw" value="'+s.di.w+'" placeholder="e.g. 4mm"></div>'
+    +'<div class="fg"><label>Notes</label><input id="dn" value="'+s.di.n+'" placeholder="notes..."></div>'
+    +'</div></div>'
+    +'<div class="ssec"><div class="stit">Craft / Technique</div><div class="g3">'
+    +'<div class="fg"><label>Technique</label><select id="wt"><option value="">—</option>'+sel(TECHS,s.la.t)+'</select></div>'
+    +'<div class="fg"><label>Style</label><input id="ws" value="'+s.la.s+'" placeholder="e.g. Classic"></div>'
+    +'<div class="fg"><label>Treatment</label><select id="wtr"><option value="">—</option>'+sel(TREATS,s.la.tr)+'</select></div>'
+    +'</div><div class="fg" style="margin-top:10px"><label>Craft notes</label>'
+    +'<textarea id="wn" rows="2" placeholder="Additional details...">'+s.la.n+'</textarea></div></div>'
+    +'<div class="ssec"><div class="stit">Precious stones</div>'
+    +'<table class="pt"><thead><tr><th>Stone</th><th>Cut</th><th>Carats</th><th>Colour</th><th>Clarity</th><th>Cert.</th><th>Notes</th><th style="width:22px"></th></tr></thead>'
+    +'<tbody id="pb"></tbody></table>'
+    +'<button class="addb" onclick="addP()"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v5M4.5 7h5"/></svg> Add stone</button></div>'
+    +'<div class="ssec"><div class="stit">Additional components</div>'
+    +'<table class="pt"><thead><tr><th>Component</th><th>Material</th><th style="width:55px">Qty</th><th>Notes</th><th style="width:22px"></th></tr></thead>'
+    +'<tbody id="eb"></tbody></table>'
+    +'<button class="addb" onclick="addE()"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v5M4.5 7h5"/></svg> Add component</button></div>';
+  rP();rE();
+  document.getElementById('so').classList.add('on');
+}
+
+function pvImg(u){const w=document.getElementById('ipw'),i=document.getElementById('ipv');if(u){w.style.display='block';i.src=u;}else w.style.display='none';}
+
+function rP(){document.getElementById('pb').innerHTML=sP.length?sP.map((p,i)=>'<tr><td><select onchange="sP['+i+'].t=this.value"><option value="">—</option>'+sel(STONES,p.t)+'</select></td><td><select onchange="sP['+i+'].f=this.value"><option value="">—</option>'+sel(CUTS,p.f)+'</select></td><td><input type="number" step="0.01" value="'+p.c+'" placeholder="ct" oninput="sP['+i+'].c=this.value" style="width:55px"></td><td><input type="text" value="'+p.co+'" placeholder="D-Z" oninput="sP['+i+'].co=this.value" style="width:48px"></td><td><input type="text" value="'+p.cl+'" placeholder="IF-I3" oninput="sP['+i+'].cl=this.value" style="width:48px"></td><td><input type="text" value="'+p.pr+'" placeholder="GIA..." oninput="sP['+i+'].pr=this.value"></td><td><input type="text" value="'+p.n+'" placeholder="notes" oninput="sP['+i+'].n=this.value"></td><td><button onclick="rmP('+i+')" style="background:none;border:none;cursor:pointer;color:#A32D2D;font-size:15px">x</button></td></tr>').join(''):'<tr><td colspan="8" style="color:#888780;font-size:12px;text-align:center;padding:10px">No stones added.</td></tr>';}
+
+function rE(){document.getElementById('eb').innerHTML=sE.length?sE.map((e,i)=>'<tr><td><input type="text" value="'+e.n+'" placeholder="e.g. Clasp" oninput="sE['+i+'].n=this.value"></td><td><input type="text" value="'+e.m+'" placeholder="e.g. 18kt Gold" oninput="sE['+i+'].m=this.value"></td><td><input type="text" value="'+e.q+'" placeholder="1" oninput="sE['+i+'].q=this.value"></td><td><input type="text" value="'+e.nt+'" placeholder="notes" oninput="sE['+i+'].nt=this.value"></td><td><button onclick="rmE('+i+')" style="background:none;border:none;cursor:pointer;color:#A32D2D;font-size:15px">x</button></td></tr>').join(''):'<tr><td colspan="5" style="color:#888780;font-size:12px;text-align:center;padding:10px">No components.</td></tr>';}
+
+function addP(){sP.push({t:'Diamond',f:'Round brilliant',c:'',co:'',cl:'',pr:'',n:''});rP();}
+function rmP(i){sP.splice(i,1);rP();}
+function addE(){sE.push({n:'',m:'',q:'1',nt:''});rE();}
+function rmE(i){sE.splice(i,1);rE();}
+
+function saveS(){
+  const a=inv.find(x=>x.id===sId);
+  a.sh={img:document.getElementById('si').value,me:{t:document.getElementById('mt').value,p:document.getElementById('mp').value,w:document.getElementById('mw').value,f:document.getElementById('mf').value},di:{r:document.getElementById('dr').value,l:document.getElementById('dl').value,d:document.getElementById('dd').value,h:document.getElementById('dh').value,w:document.getElementById('dw').value,n:document.getElementById('dn').value},la:{t:document.getElementById('wt').value,s:document.getElementById('ws').value,tr:document.getElementById('wtr').value,n:document.getElementById('wn').value},pi:JSON.parse(JSON.stringify(sP)),ex:JSON.parse(JSON.stringify(sE))};
+  fi();uStats();closeS();toast('Sheet saved for '+sId);showI(sId);
+}
+function closeS(){document.getElementById('so').classList.remove('on');}
+
+function openAdd(){
+  if(cur!=='inv'){
+    document.getElementById('mb').innerHTML='<div style="font-size:15px;font-weight:500;margin-bottom:1.25rem">New supplier order</div>'
+      +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Supplier *</label><select id="of" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"><option>Gioielli Veneto Srl</option><option>Marco Oro Roma</option><option>Diamonds Co. Milan</option><option>Northern Silver Ltd</option><option>Watch Imports Spa</option><option>Other</option></select></div>'
+      +'<div class="fg2"><div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Order date</label><input id="od" type="date" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+      +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Delivery</label><input id="oc" type="date" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div></div>'
+      +'<div class="fg2"><div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Items</label><input id="oa" type="number" value="1" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+      +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Total (€)</label><input id="ot" type="number" value="0" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div></div>'
+      +'<div class="mft"><button class="btn" onclick="closeM()">Cancel</button><button class="btn btnp" onclick="saveO()">Create order</button></div>';
+    setTimeout(()=>{const t=new Date().toISOString().split('T')[0];if(document.getElementById('od'))document.getElementById('od').value=t;},10);
+    document.getElementById('mo').classList.add('on');return;
+  }
+  document.getElementById('mb').innerHTML='<div style="font-size:15px;font-weight:500;margin-bottom:1.25rem">New item</div>'
+    +'<div class="fg2"><div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Code *</label><input id="mi" placeholder="RNG-xxx" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+    +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Category *</label><select id="mc" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"><option value="Rings">Rings</option><option value="Necklaces">Necklaces</option><option value="Bracelets">Bracelets</option><option value="Earrings">Earrings</option><option value="Watches">Watches</option></select></div></div>'
+    +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Description *</label><input id="mn" placeholder="Item name" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+    +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Material</label><input id="mm" placeholder="e.g. 18kt Gold" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+    +'<div class="fg2"><div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Purchase (€)</label><input id="mb2" type="number" placeholder="0" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+    +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Sale (€)</label><input id="ms" type="number" placeholder="0" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div></div>'
+    +'<div class="fg2"><div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Quantity</label><input id="mq" type="number" value="1" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div>'
+    +'<div style="margin-bottom:.875rem"><label style="font-size:11px;font-weight:500;color:#5F5E5A;display:block;margin-bottom:4px">Min stock</label><input id="mk" type="number" value="1" style="width:100%;padding:8px 10px;border:.5px solid rgba(0,0,0,.2);border-radius:7px;font-size:13px;background:#fff;font-family:inherit"></div></div>'
+    +'<div class="mft"><button class="btn" onclick="closeM()">Cancel</button><button class="btn btnp" onclick="saveI()">Save & fill sheet →</button></div>';
+  document.getElementById('mo').classList.add('on');
+}
+
+function saveI(){
+  const id=document.getElementById('mi').value.trim();
+  const n=document.getElementById('mn').value.trim();
+  if(!id||!n){toast('Fill in code and description');return;}
+  const q=parseInt(document.getElementById('mq').value)||0;
+  const mn=parseInt(document.getElementById('mk').value)||1;
+  inv.push({id,n,c:document.getElementById('mc').value,m:document.getElementById('mm').value||'—',b:parseFloat(document.getElementById('mb2').value)||0,s:parseFloat(document.getElementById('ms').value)||0,q,mn,st:q===0?'Out of stock':q<=mn?'Low stock':'Available',sh:null});
+  fi();uStats();closeM();toast('Item added — fill the technical sheet');
+  setTimeout(()=>{showI(id);setTimeout(()=>openS(id),350);},400);
+}
+
+function saveO(){
+  const d=document.getElementById('od').value;
+  if(!d){toast('Enter order date');return;}
+  const num='ORD-'+Date.now().toString().slice(-6);
+  const fd=x=>{if(!x)return'—';const p=x.split('-');return p[2]+'/'+p[1]+'/'+p[0];};
+  ord.unshift({num,sup:document.getElementById('of').value,dt:fd(d),dl:fd(document.getElementById('oc').value),it:parseInt(document.getElementById('oa').value)||0,tot:parseFloat(document.getElementById('ot').value)||0,st:'Pending'});
+  fo();uStats();closeM();toast('Order '+num+' created');
+}
+function closeM(){document.getElementById('mo').classList.remove('on');}
+
+rInv(inv);rOrd(ord);uStats();
+</script></body></html>
